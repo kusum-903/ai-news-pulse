@@ -1,0 +1,82 @@
+database:
+  host: localhost
+  port: 5432
+  dbname: news_pulse
+  user: postgres
+  password: "12345678"
+
+user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+
+# ai_only: true  -> save every article from this feed
+# ai_only: false -> save only articles that match the AI keywords below
+feeds:
+  - name: TechCrunch AI
+    url: https://techcrunch.com/category/artificial-intelligence/feed/
+    ai_only: true
+  - name: VentureBeat AI
+    url: https://venturebeat.com/category/ai/feed/
+    ai_only: true
+  - name: MIT Technology Review AI
+    url: https://www.technologyreview.com/topic/artificial-intelligence/feed
+    ai_only: true
+  - name: The Verge AI
+    url: https://www.theverge.com/rss/ai-artificial-intelligence/index.xml
+    ai_only: true
+  - name: AI News
+    url: https://www.artificialintelligence-news.com/feed/
+    ai_only: true
+  - name: OpenAI News
+    url: https://openai.com/news/rss.xml
+    ai_only: true
+  - name: Hugging Face Blog
+    url: https://huggingface.co/blog/feed.xml
+    ai_only: true
+
+  - name: BBC World
+    url: https://feeds.bbci.co.uk/news/world/rss.xml
+    ai_only: false
+  - name: BBC Technology
+    url: https://feeds.bbci.co.uk/news/technology/rss.xml
+    ai_only: false
+  - name: Al Jazeera
+    url: https://www.aljazeera.com/xml/rss/all.xml
+    ai_only: false
+  - name: The Guardian World
+    url: https://www.theguardian.com/world/rss
+    ai_only: false
+  - name: The Guardian Technology
+    url: https://www.theguardian.com/technology/rss
+    ai_only: false
+  - name: NYT World
+    url: https://rss.nytimes.com/services/xml/rss/nyt/World.xml
+    ai_only: false
+  - name: NYT Technology
+    url: https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml
+    ai_only: false
+  - name: CNN World
+    url: http://rss.cnn.com/rss/edition_world.rss
+    ai_only: false
+  - name: The Hindu
+    url: https://www.thehindu.com/news/international/feeder/default.rss
+    ai_only: false
+  - name: NDTV
+    url: https://feeds.feedburner.com/ndtvnews-world-news
+    ai_only: false
+
+ai_keywords:
+  - artificial intelligence
+  - chatgpt
+  - openai
+  - anthropic
+  - gemini
+  - machine learning
+  - deep learning
+  - neural network
+  - generative
+  - chatbot
+  - deepmind
+  - nvidia
+  - copilot
+  - robot
+  - llm
+  - ai
