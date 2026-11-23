@@ -1,3 +1,8 @@
 feedparser
 psycopg2-binary
 pyyaml
+beautifulsoup4
+requests
+sentence-transformers
+pandas
+numpy
