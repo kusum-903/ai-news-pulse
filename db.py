@@ -4,8 +4,19 @@ from psycopg2 import sql
 from utils import load_config
 
 CREATE_TABLE_SQL = """
+CREATE TABLE IF NOT EXISTS stories (
+    id                 SERIAL PRIMARY KEY,
+    title              TEXT NOT NULL,
+    summary            TEXT,
+    topic              TEXT,
+    first_seen         TIMESTAMPTZ DEFAULT NOW(),
+    last_updated       TIMESTAMPTZ DEFAULT NOW(),
+    centroid_embedding JSONB
+);
+
 CREATE TABLE IF NOT EXISTS articles (
     id            SERIAL PRIMARY KEY,
+    story_id      INTEGER REFERENCES stories(id),
     source        TEXT NOT NULL,
     title         TEXT NOT NULL,
     url           TEXT NOT NULL UNIQUE,
@@ -13,9 +24,30 @@ CREATE TABLE IF NOT EXISTS articles (
     content       TEXT,
     author        TEXT,
     published_at  TIMESTAMPTZ,
-    collected_at  TIMESTAMPTZ DEFAULT NOW()
+    collected_at  TIMESTAMPTZ DEFAULT NOW(),
+    embedding     JSONB,
+    update_delta  TEXT
 );
+
+ALTER TABLE articles ADD COLUMN IF NOT EXISTS story_id INTEGER REFERENCES stories(id);
+ALTER TABLE articles ADD COLUMN IF NOT EXISTS embedding JSONB;
+ALTER TABLE articles ADD COLUMN IF NOT EXISTS update_delta TEXT;
+
+CREATE TABLE IF NOT EXISTS entities (
+    id    SERIAL PRIMARY KEY,
+    name  TEXT NOT NULL,
+    type  TEXT NOT NULL,
+    UNIQUE (name, type)
+);
+
+CREATE TABLE IF NOT EXISTS article_entities (
+    article_id INTEGER REFERENCES articles(id) ON DELETE CASCADE,
+    entity_id  INTEGER REFERENCES entities(id) ON DELETE CASCADE,
+    PRIMARY KEY (article_id, entity_id)
+);
+
 CREATE INDEX IF NOT EXISTS idx_articles_published ON articles (published_at);
+CREATE INDEX IF NOT EXISTS idx_articles_story_id ON articles (story_id);
 """
 
 INSERT_SQL = """
