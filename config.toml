@@ -1,0 +1,9 @@
+[theme]
+base = "dark"
+backgroundColor = "#1F2530"           # calm dark slate (not black)
+secondaryBackgroundColor = "#2A3140"  # cards, inputs, sidebar
+textColor = "#E8EAED"                 # soft white, easy on the eyes
+primaryColor = "#4FD1C5"              # one accent: soft teal
+font = "sans serif"
+borderColor = "#4FD1C5"       # border of cards, inputs, expanders
+baseRadius = "12px"           # rounded corners
